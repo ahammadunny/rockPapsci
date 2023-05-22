@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2> please check if the program worked correct in the following lines:</h2>
+    <p id = "demo"> </p>
+    
+    <script>
+        let cs, ps;
+        let cswins=0;
+        let pswins=0;
+        choice = ['rock', 'paper', 'scissors'];
+        function getPlayerChoice() {
+        ps= prompt("please make a selection", "paper");
+            ps = ps.toLowerCase();
+            brk = "<br/>";
+            nxt= "\n"
+            alert("player choice is " + ps + nxt + "your score is " + pswins);
+           document.getElementById("demo").innerHTML += "Player choice is " + ps + brk ;
+            return ps;
+        }
+        
+        
+        function getComputerChoice() {
+        cs= choice[Math.floor( Math.random()*3 )];
+        alert("computer choice is " + cs);
+        brk = "<br/>";
+        document.getElementById("demo").innerHTML += "Computer choice is " + cs + brk;
+        return cs;
+        }
+        
+        function playRound(cs, ps) {
+            
+            if (cs == ps) { 
+                console.log("it is a draw")
+          }
+          else if ((cs == 'rock') && (ps == 'scissors')){
+           cswins++;
+           return cswins;
+          }
+           else if(( cs == 'rock') && (ps == 'paper')) {
+            pswins++;
+            return pswins;
+           }
+           else if ((cs == 'scissors') && (ps == 'paper')) {
+            cswins++;
+            return cswins;
+           }
+           else if ((cs == 'scissors') && (ps == 'rock')) {
+            pswins++;
+            return pswins;
+           }
+           else if ((cs == 'paper') && (ps == 'rock')) {
+            cswins++;
+            return cswins;
+           }
+           else if ((cs == 'paper') && (ps == 'scissors')) {
+            pswins++;
+            return pswins;
+           }
+
+        }
+        function game () {
+         for (let i =0; i < 5; i++) {
+            cs= getComputerChoice();
+            ps = getPlayerChoice();
+            playRound(cs, ps);
+         }
+         if(pswins === cswins) {
+            alert("it is a draw")
+          //  Document.getElementById("demo").textContent= "It is a draw " ;
+         }
+         else if (cswins > pswins) {
+            alert ("computer wins");
+          //  Document.getElementById("demo").textContent= "Computer wins"
+         }
+         else {
+            alert(" player wins")
+          //  Document.getElementById("demo").textContent= "Player wins"
+
+         }
+         }
+         game();
+         
+
+        
+    </script>
+</body>
+</html>
