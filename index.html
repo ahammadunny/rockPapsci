@@ -5,32 +5,90 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<style>
+    button {
+ /* background-color: #4CAF50; */
+  background-color:#7b38d8;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer; 
+  transition:all 0.5s;
+}
+    button:hover{
+  background-color:green;
+    }
+</style>
 </head>
 <body>
-    <h2> please check if the program worked correct in the following lines:</h2>
+    <h2> please select your choice by clicking one of the buttons:</h2>
     <p id = "demo"> </p>
-    
+    <div id ="wrapper">
+    <button   value="rock"> rock</button>
+    <button   value="scissors">scissors</button>
+    <button   value="paper">paper</button>
+    </div>
     <script>
         let cs, ps;
         let cswins=0;
         let pswins=0;
         choice = ['rock', 'paper', 'scissors'];
-        function getPlayerChoice() {
-        ps= prompt("please make a selection", "paper");
-            ps = ps.toLowerCase();
-            brk = "<br/>";
-            nxt= "\n"
-            alert("player choice is " + ps + nxt + "your score is " + pswins);
-           document.getElementById("demo").innerHTML += "Player choice is " + ps + brk ;
-            return ps;
-        }
-        
-        
+       // function game() {
+            const wrapper=document.querySelector('#wrapper');
+            
+            wrapper.addEventListener('click', function(event){
+                    target=event.target;
+                   //console.log("target is "+target);
+                 //alert("clicked button is"+target.outerHTML);
+              //   console.log(target);
+                if ((pswins || cswins) < 5) {
+                 ps = target.getAttribute("value");
+                 //alert("player choice is "+ps)
+                cs = getComputerChoice();
+                // alert("computer choice is " +cs)
+                playRound(cs,ps);
+                brk = "<br/>";
+                document.getElementById("demo").innerHTML += "your score is "+pswins + " computer score is "+cswins + brk;
+                }
+                else{
+                
+                    if(pswins === cswins) {
+            //alert("it is a draw")
+            
+            document.getElementById("demo").innerHTML+= "It is a draw. you can start all over. please make a choice, if you want to continue "+brk ;
+            cswins=0;
+            pswins=0;
+         }
+         else if (cswins > pswins) {
+           //alert ("computer wins");
+            document.getElementById("demo").innerHTML+= "Computer wins. you can start all over. please make a choice, if you want to continue" +brk
+            cswins=0;
+            pswins=0;
+         }
+         else {
+            //alert(" player wins")
+            
+            document.getElementById("demo").innerHTML+= "Player wins. you can start all over. please make a choice, if you want to continue" +brk
+            cswins=0;
+            pswins=0;
+
+         }
+                }
+
+        })
+    
+    
         function getComputerChoice() {
         cs= choice[Math.floor( Math.random()*3 )];
-        alert("computer choice is " + cs);
+        //alert("computer choice is " + cs);
         brk = "<br/>";
         document.getElementById("demo").innerHTML += "Computer choice is " + cs + brk;
+        //document.getElementById("demo").innerHTML += "your score is -"+pswins + " computer score is "+cswins + brk;
         return cs;
         }
         
@@ -65,30 +123,6 @@
            }
 
         }
-        function game () {
-         for (let i =0; i < 5; i++) {
-            cs= getComputerChoice();
-            ps = getPlayerChoice();
-            playRound(cs, ps);
-         }
-         if(pswins === cswins) {
-            alert("it is a draw")
-          //  Document.getElementById("demo").textContent= "It is a draw " ;
-         }
-         else if (cswins > pswins) {
-            alert ("computer wins");
-          //  Document.getElementById("demo").textContent= "Computer wins"
-         }
-         else {
-            alert(" player wins")
-          //  Document.getElementById("demo").textContent= "Player wins"
-
-         }
-         }
-         game();
-         
-
-        
-    </script>
+</script>
 </body>
 </html>
